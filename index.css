@@ -2,6 +2,7 @@ body{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     background-color: hsl(0, 0%, 88%);
     margin: 0;
+    padding-top: 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -46,7 +47,7 @@ button:hover{
     padding: 50px;
     box-shadow: 2px 2px 5px #00000093;
     border-radius: 10px;
-    width: 300px;
+    width: 400px;
 }
 .cityDisplay, .tempDisplay{
     font-size: 3.5rem;
