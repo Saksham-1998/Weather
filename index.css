@@ -1,0 +1,68 @@
+body{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: hsl(0, 0%, 88%);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url(bkimage.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.weatherForm{
+    margin: 20px;
+}
+
+.cityInput{
+    padding: 10px;
+    font-weight: bold;
+    font-size: 1.5rem;
+    border: 2px solid hsla(0, 0%, 45%, 0.749);
+    border-radius: 5px;
+    outline: none;
+}
+.cityInput::placeholder{
+    color: rgba(0, 0, 0, 0.253);
+}
+button{
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: hsl(0, 0%, 88%);
+    background-color: hsla(124, 79%, 37%, 0.815);
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+button:hover{
+    cursor: pointer;
+    background-color: hsl(124, 79%, 28%);
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(180deg, #ff0000a9, #b3ff00a9);
+    padding: 50px;
+    box-shadow: 2px 2px 5px #00000093;
+    border-radius: 10px;
+    width: 300px;
+}
+.cityDisplay, .tempDisplay{
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin: 20px;
+    color: hsla(0, 0%, 0%, 0.75);
+}
+.humidityDisplay, .descp{
+    font-weight: bold;
+}
+.emojiDisplay{
+    margin: 0;
+    font-size: 6rem;
+}
+.errorDisplay{
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: hsla(0, 0%, 0%, 0.75);
+}
