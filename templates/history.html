@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #282c34;
+            color: white;
+            padding: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background: #444;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        li:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search History</h1>
+    {% if history %}
+        <ul>
+            {% for city in history %}
+                <li onclick="goToCity('{{ city }}')">{{ city }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No history available.</p>
+    {% endif %}
+
+    <script>
+        function goToCity(city) {
+            localStorage.setItem('selectedCity', city);
+            window.location.href = "/";
+        }
+    </script>
+</body>
+</html>

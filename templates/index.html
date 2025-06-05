@@ -12,8 +12,10 @@
         <button type="submit">Get Weather</button>
     </form>
 
-    <div class="card" style="visibility: hidden;">
-    </div>
+    <div class="card" style="visibility: hidden;"></div>
+
+
+    <button style="color: whitesmoke;"><a href="{{ url_for('history_page') }}">History</a></button>
 
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
     

@@ -114,3 +114,14 @@ function displayError(message) {
     card.appendChild(errorDisplay);
 
 }
+
+window.addEventListener("DOMContentLoaded", async () => {
+    const savedCity = localStorage.getItem("selectedCity");
+    if (savedCity) {
+        cityInput.value = savedCity;
+        const weatherData = await getWeatherData(savedCity);
+        displayWeatherInfo(weatherData);
+        localStorage.removeItem("selectedCity");
+    }
+});
+
