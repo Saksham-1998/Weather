@@ -15,7 +15,20 @@
     <div class="card" style="visibility: hidden;"></div>
 
 
-    <button onclick="window.location.href='{{ url_for('history_page') }}'" style="color: whitesmoke;">History</button>
+    <button 
+        onclick="window.location.href='{{ url_for('history_page') }}'" 
+        style=
+            "position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #444;
+            color: whitesmoke;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;">
+        History
+    </button>
 
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
     
