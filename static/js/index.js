@@ -13,6 +13,9 @@ weatherForm.addEventListener("submit", async event => {
         try {
             const weatherData = await getWeatherData(city);
             displayWeatherInfo(weatherData);
+
+            saveCity(city);
+            
         }
         catch (error) {
             console.error(error);
@@ -125,3 +128,18 @@ window.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
+function saveCity(cityName) {
+    fetch('/history', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ city: cityName })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            console.log('City saved!');
+        }
+    });
+}
