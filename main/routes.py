@@ -2,7 +2,7 @@ from main import app
 from main.models import User
 from main.forms import RegisterForm, LoginForm
 from main import db
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import check_password_hash, generate_password_hash
 
 
@@ -63,19 +63,25 @@ def logout():
 
 
 
-HISTORY_FILE = 'history.json'
+def get_user_history_file():
+    return f'history_{current_user.id}.json'
+
 
 def load_history():
-    if os.path.exists(HISTORY_FILE):
-        with open(HISTORY_FILE, 'r') as file:
+    history_file = get_user_history_file()
+
+    if os.path.exists(history_file):
+        with open(history_file, 'r') as file:
             return json.load(file)
     return []
 
 def save_history(history):
-    with open(HISTORY_FILE, 'w') as file:
+    history_file = get_user_history_file()
+    with open(history_file, 'w') as file:
         json.dump(history, file)
 
 @app.route('/history', methods=['POST'])
+@login_required
 def add_city():
     city = request.json.get('city')
     history = load_history()
@@ -87,6 +93,7 @@ def add_city():
     return jsonify({'status': 'success'})
 
 @app.route('/history_page')
+@login_required
 def history_page():
     history = load_history()
     return render_template('history.html', history=history)
