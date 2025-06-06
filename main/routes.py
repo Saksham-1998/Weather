@@ -60,8 +60,6 @@ def logout():
     return redirect(url_for('login'))
 
 
-
-
 def get_user_history_file():
     return f'history_{current_user.id}.json'
 
