@@ -143,3 +143,10 @@ function saveCity(cityName) {
         }
     });
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    const messages = document.querySelectorAll('.flash-message');
+    setTimeout(() => {
+        messages.forEach(msg => msg.classList.add('hide'));
+    }, 3000);
+});
