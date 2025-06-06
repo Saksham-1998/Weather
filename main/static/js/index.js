@@ -8,7 +8,6 @@ const apiKey = "571e0934ec0fa7c2096b90f8498fe253";
 weatherForm.addEventListener("submit", async event => {
     event.preventDefault();
     const city = cityInput.value;
-
     if (city) {
         try {
             const weatherData = await getWeatherData(city);
@@ -32,8 +31,6 @@ weatherForm.addEventListener("submit", async event => {
 async function getWeatherData(city) {
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
     const response = await fetch(apiUrl);
-
-    console.log(response);
 
     if (!response.ok) {
         throw new Error("Could not fetch weather data");
@@ -117,6 +114,8 @@ function displayError(message) {
     card.appendChild(errorDisplay);
 
 }
+
+
 
 window.addEventListener("DOMContentLoaded", async () => {
     const savedCity = localStorage.getItem("selectedCity");
