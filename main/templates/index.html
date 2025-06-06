@@ -24,41 +24,68 @@
         box-shadow: none;
         border-color: #ccc;
     }
+    .flash-message {
+        color: white;
+        transition: opacity 0.5s ease;
+    }
+    .flash-message.hide {
+        opacity: 0;
+        pointer-events: none;
+    }
   </style>
 </head>
 <body>
-    <div class="container">
-      
-      <h1 style="color: #e7dfdfdd;"><b>Create User Account:</b></h1>
 
-      <form method="post" class="from-register" style="color: #e7dfdfdd;">
-        
-          {{ form.hidden_tag() }}
-          <div class="mb-3" id="one">
-            {{form.username.label()}}
-            {{form.username(class="form-control", placeholder="Enter your name")}}
-          </div>
-          <div class="mb-3" id="one">
-            {{form.email.label()}}
-            {{form.email(class="form-control", placeholder="Enter your email")}}
-          </div>
-          <div class="mb-3" id="one">
-            {{form.password1.label()}}
-            {{form.password1(class="form-control", placeholder="password")}}
-          </div>
-          <div class="mb-3" id="one">
-            {{form.password2.label()}}
-             {{form.password2(class="form-control", placeholder="confirm password")}}
-          </div>
-            <br>
-          <div class="form-group submit-button" id="one">
-            {{ form.submit (class= "btn btn-primary")}}
-          </div>
-          <div class="text-end mt-2" id="one">
-            <small class="text-light">Already have an account?</small>
-            <a class="btn btn-sm btn-outline-light ms-2" href="{{ url_for('login') }}">Sign in</a>
-        </div>    
-      </form>
-    </div>    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p class="flash-message">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+
+  <div class="container">
+    
+    <h1 style="color: #e7dfdfdd;"><b>Create User Account:</b></h1>
+
+    <form method="post" class="from-register" style="color: #e7dfdfdd;">
+      
+        {{ form.hidden_tag() }}
+        <div class="mb-3" id="one">
+          {{form.username.label()}}
+          {{form.username(class="form-control", placeholder="Enter your name")}}
+        </div>
+        <div class="mb-3" id="one">
+          {{form.email.label()}}
+          {{form.email(class="form-control", placeholder="Enter your email")}}
+        </div>
+        <div class="mb-3" id="one">
+          {{form.password1.label()}}
+          {{form.password1(class="form-control", placeholder="password")}}
+        </div>
+        <div class="mb-3" id="one">
+          {{form.password2.label()}}
+            {{form.password2(class="form-control", placeholder="confirm password")}}
+        </div>
+          <br>
+        <div class="form-group submit-button" id="one">
+          {{ form.submit (class= "btn btn-primary")}}
+        </div>
+        <div class="text-end mt-2" id="one">
+          <small class="text-light">Already have an account?</small>
+          <a class="btn btn-sm btn-outline-light ms-2" href="{{ url_for('login') }}">Sign in</a>
+      </div>    
+    </form>
+  </div> 
+  <script>
+        // Wait for the DOM to load
+        document.addEventListener("DOMContentLoaded", function() {
+            const messages = document.querySelectorAll('.flash-message');
+            setTimeout(() => {
+                messages.forEach(msg => msg.classList.add('hide'));
+            }, 3000);
+        });
+    </script>   
 </body>
 </html>

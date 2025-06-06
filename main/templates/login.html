@@ -24,9 +24,27 @@
             box-shadow: none;
             border-color: #ccc;
         }
+        .flash-message {
+            color: white;
+            transition: opacity 0.5s ease;
+        }
+        .flash-message.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p class="flash-message">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+
+
     <div class="container">
     <h1 style="color: #e7dfdfdd;">User Login</h1>
     <form method="post"  style="color: #e7dfdfdd;">
@@ -49,5 +67,14 @@
             <a class="btn btn-sm btn-outline-light ms-2" href="{{ url_for('index') }}">Create Account</a>
         </div>
     </form>
+    <script>
+        // Wait for the DOM to load
+        document.addEventListener("DOMContentLoaded", function() {
+            const messages = document.querySelectorAll('.flash-message');
+            setTimeout(() => {
+                messages.forEach(msg => msg.classList.add('hide'));
+            }, 3000);
+        });
+    </script>
 </body>
 </html>

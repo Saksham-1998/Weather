@@ -5,8 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
     <title>Weather</title>
+    <style>
+        .flash-message {
+            color: white;
+            transition: opacity 0.5s ease;
+        }
+        .flash-message.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p class="flash-message">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
     <form class="weatherForm">
         <input type="text" class="cityInput" placeholder="Enter a City">
         <button type="submit">Get Weather</button>
@@ -43,6 +62,15 @@
             cursor: pointer;">
         Logout
     </button>
+    <script>
+        // Wait for the DOM to load
+        document.addEventListener("DOMContentLoaded", function() {
+            const messages = document.querySelectorAll('.flash-message');
+            setTimeout(() => {
+                messages.forEach(msg => msg.classList.add('hide'));
+            }, 3000);
+        });
+    </script>
 
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
     
