@@ -1,36 +1,46 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='/index.css') }}">
-    <title>Weather</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <title>Document</title>
 </head>
 <body>
-    <form class="weatherForm">
-        <input type="text" class="cityInput" placeholder="Enter a City">
-        <button type="submit">Get Weather</button>
-    </form>
+    <div class="container">
+      
+      <h1><b>Create User Account:</b></h1>
 
-    <div class="card" style="visibility: hidden;"></div>
-
-
-    <button 
-        onclick="window.location.href='{{ url_for('history_page') }}'" 
-        style=
-            "position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #444;
-            color: whitesmoke;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;">
-        History
-    </button>
-
-    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
-    
+      <form method="post" class="from-register">
+        
+          {{ form.hidden_tag() }}
+          <div class="mb-3" id="one">
+            {{form.username.label()}}
+            {{form.username(class="form-control")}}
+          </div>
+          <div class="mb-3" id="one">
+            {{form.email.label()}}
+            {{form.email(class="form-control")}}
+          </div>
+          <div class="mb-3" id="one">
+            {{form.password1.label()}}
+            {{form.password1(class="form-control", placeholder="password")}}
+          </div>
+          <div class="mb-3" id="one">
+            {{form.password2.label()}}
+             {{form.password2(class="form-control", placeholder="confirm password")}}
+          </div>
+            <br>
+          <div class="form-group submit-button" id="one">
+            {{ form.submit (class= "btn btn-primary")}}
+          </div>
+          <div class="text-end mt-2" id="one">
+            <small class="text-light">Already have an account?</small>
+            <a class="btn btn-sm btn-outline-light ms-2" href="{{ url_for('login') }}">Sign in</a>
+        </div>
+                
+      </form>
+    </div>    
 </body>
 </html>
