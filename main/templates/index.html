@@ -86,8 +86,14 @@
             <a class="btn btn-sm btn-outline-light ms-2" href="{{ url_for('login') }}">Sign in</a>
           </div>    
       </form>
-    </div>  
-    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
- 
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const messages = document.querySelectorAll('.flash-message');
+            setTimeout(() => {
+                messages.forEach(msg => msg.classList.add('hide'));
+            }, 3000);
+        });
+    </script>
 </body>
 </html>

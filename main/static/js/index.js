@@ -48,7 +48,7 @@ function displayWeatherInfo(data) {
         weather: [{ description, id }] } = data;
 
     card.textContent= "";
-    card.style.visibility = "visible";
+    card.style.display="flex";
     
     const cityDisplay = document.createElement("h1");
     const tempDisplay = document.createElement("p");
@@ -110,7 +110,7 @@ function displayError(message) {
 
 
     card.textContent = "";
-    card.style.visibility = "visible";
+    card.style.display="flex";
     card.appendChild(errorDisplay);
 
 }

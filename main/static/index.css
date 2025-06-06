@@ -5,9 +5,15 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-image: url(bkimage.jpg);
+    background-image: url(../static/bkimage.jpg) !important;
     background-size: cover;
     background-repeat: no-repeat;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .weatherForm{
@@ -43,7 +49,6 @@ button:hover{
 }
 .card{
     display: flex;
-    flex-direction: column;
     align-items: center;
     background: linear-gradient(180deg, #9c373769, #3d492169);
     padding: 50px;
