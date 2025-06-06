@@ -38,7 +38,7 @@
         <p>No history available.</p>
     {% endif %}
 
-    <a href="/" style="
+    <a href="/weather" style="
                     position: fixed;
                     bottom: 20px;
                     right: 20px;
@@ -53,7 +53,7 @@
     <script>
         function goToCity(city) {
             localStorage.setItem('selectedCity', city);
-            window.location.href = "/";
+            window.location.href = "/weather";
         }
     </script>
 </body>

@@ -35,6 +35,7 @@ def index():
     return render_template('index.html', form = form)
 
 @app.route('/weather')
+@login_required
 def weather():
     return render_template('weather.html')
 

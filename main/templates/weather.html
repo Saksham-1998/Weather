@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
     <title>Weather</title>
 </head>
 <body>
@@ -28,6 +28,20 @@
             border-radius: 5px;
             cursor: pointer;">
         History
+    </button>
+    <button 
+        onclick="window.location.href='{{ url_for('logout') }}'" 
+        style=
+            "position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #444;
+            color: whitesmoke;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;">
+        Logout
     </button>
 
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
