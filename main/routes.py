@@ -13,51 +13,41 @@ import os
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    form = RegisterForm()
-    if form.validate_on_submit():
-        user_create = User(username= form.username.data,
-                           email= form.email.data,
-                           password_hash = generate_password_hash(form.password1.data))
-        db.session.add(user_create)
-        db.session.flush()
-        db.session.commit()
+    register_form = RegisterForm(prefix='register')
+    login_form = LoginForm(prefix='login')
 
-        login_user(user_create)
+    if register_form.validate_on_submit() and 'register-submit' in request.form:
+        user = User(username=register_form.username.data,
+                    email=register_form.email.data,
+                    password_hash=generate_password_hash(register_form.password1.data))
+        db.session.add(user)
+        db.session.commit()
+        login_user(user)
         flash('Account created successfully! You are logged in', category='success')
         return redirect(url_for('weather'))
-    
-    if form.errors != {}:
-        for field, error_messages in form.errors.items():
-            for err in error_messages:
-                flash(f"{field.capitalize()}: {err}", category='danger')
-    
-    return render_template('index.html', form = form)
 
-@app.route('/weather')
-@login_required
-def weather():
-    return render_template('weather.html')
-
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        if user and check_password_hash(user.password_hash, form.password.data):
+    elif login_form.validate_on_submit() and 'login-submit' in request.form:
+        user = User.query.filter_by(username=login_form.username.data).first()
+        if user and check_password_hash(user.password_hash, login_form.password.data):
             login_user(user)
             flash('Login successful!', category='success')
-            return redirect(url_for('weather'))   
+            return redirect(url_for('weather'))
         else:
             flash('Invalid username or password', category='danger')
-    return render_template('login.html', form=form)
+
+    return render_template('index.html', register_form=register_form, login_form=login_form)
 
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     flash("You have logged out!", category="info")
-    return redirect(url_for('login'))
+    return redirect(url_for('index'))
+
+@app.route('/weather')
+@login_required
+def weather():
+    return render_template('weather.html')
 
 
 def get_user_history_file():

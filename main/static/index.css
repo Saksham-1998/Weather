@@ -39,7 +39,7 @@ button{
     border-radius: 5px;
     padding: 10px 20px;
     color: #e7dfdfdd;
-    background-color: hsla(124, 95%, 23%, 0.815);
+    background-color: #03720ad0;
     font-weight: bold;
     font-size: 1.5rem;
 }
@@ -50,7 +50,7 @@ button:hover{
 .card{
     display: flex;
     align-items: center;
-    background: linear-gradient(180deg, #9c373769, #3d492169);
+    background: linear-gradient(180deg, #46323269, #3d492169);
     padding: 50px;
     box-shadow: 2px 2px 5px #00000093;
     border-radius: 10px;
@@ -60,27 +60,37 @@ button:hover{
     font-size: 3.5rem;
     font-weight: bold;
     margin: 20px;
-    color: #e7dfdfdd;
+    color: #ffffffdd;
 }
 .humidityDisplay, .descp{
     font-weight: bold;
-    color: #e7dfdfdd;
+    color: #ffffffdd;
 }
 .emojiDisplay{
     margin: 0;
     font-size: 6rem;
-    color: #e7dfdfdd;
+    color: #ffffffdd;
 }
 .errorDisplay{
     font-weight: bold;
     font-size: 1.5rem;
-    color: #e7dfdfdd;
+    color: #ffffffdd;
 }
 .flash-message {
-    color: white;
-    transition: opacity 0.5s ease;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1050;
+  color: #e7dfdfdd;
+  border-radius: 10px;
+  font-weight: 500;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  pointer-events: none;
 }
+
 .flash-message.hide {
-    opacity: 0;
-    pointer-events: none;
+  opacity: 0;
+  transform: translateX(-50%) scale(0.95);
 }
