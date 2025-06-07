@@ -54,7 +54,7 @@ button:hover{
     padding: 50px;
     box-shadow: 2px 2px 5px #00000093;
     border-radius: 10px;
-    width: 400px;
+    width: 500px;
 }
 .cityDisplay, .tempDisplay{
     font-size: 3.5rem;
