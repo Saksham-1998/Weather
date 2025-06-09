@@ -29,6 +29,12 @@
             border-radius: 8px;
             cursor: pointer;
         }
+        .del{
+            position: fixed;
+            right: 40px;
+            text-decoration: none;
+            color: rgb(234, 188, 188);
+        }
 
         li:hover {
             background: #555;
@@ -41,7 +47,7 @@
     {% if history %}
     <ul>
         {% for city in history %}
-        <li onclick="goToCity('{{ city }}')">{{ city }}</li>
+        <li onclick="goToCity('{{ city }}')">{{ city }} &nbsp;<a href="#" onclick="event.stopPropagation(); deleteCity('{{ city }}'); return false;" class="del">Delete</a></li>
         {% endfor %}
     </ul>
     {% else %}
@@ -64,6 +70,21 @@
         function goToCity(city) {
             localStorage.setItem('selectedCity', city);
             window.location.href = "/weather";
+        }
+        function deleteCity(city) {
+            fetch('/delete_city', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ city: city }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                location.reload();
+                }
+            });
         }
     </script>
 </body>

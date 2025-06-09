@@ -11,6 +11,8 @@ import json
 import os
 
 
+#### login user ####
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     register_form = RegisterForm(prefix='register')
@@ -37,6 +39,8 @@ def index():
 
     return render_template('index.html', register_form=register_form, login_form=login_form)
 
+## logout user ##
+
 @app.route('/logout')
 @login_required
 def logout():
@@ -44,15 +48,18 @@ def logout():
     flash("You have logged out!", category="info")
     return redirect(url_for('index'))
 
+## weather display ##
 @app.route('/weather')
 @login_required
 def weather():
     return render_template('weather.html')
 
+## history data of every user
 
 def get_user_history_file():
     return f'history_{current_user.id}.json'
 
+## load history of user
 
 def load_history():
     history_file = get_user_history_file()
@@ -61,6 +68,8 @@ def load_history():
         with open(history_file, 'r') as file:
             return json.load(file)
     return []
+
+## saving a history of every user
 
 def save_history(history):
     history_file = get_user_history_file()
@@ -79,8 +88,24 @@ def add_city():
         save_history(history)
     return jsonify({'status': 'success'})
 
+## history page
+
 @app.route('/history_page')
 @login_required
 def history_page():
     history = load_history()
     return render_template('history.html', history=history)
+
+
+#### delete history ####
+
+@app.route('/delete_city', methods=['POST'])
+@login_required
+def delete_city():
+    city = request.json.get('city')
+    history = load_history()
+    if city in history:
+        history.remove(city)
+        save_history(history)
+        return jsonify({'status': 'success'})
+    return jsonify({'status': 'not_found'})

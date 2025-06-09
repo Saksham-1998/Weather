@@ -83,6 +83,8 @@
     }
 
     .spin {
+      max-height: 500px;
+      filter: drop-shadow(0 0 10px #ffffff69);
       animation: spin 120s linear infinite;
       transform-origin: center;
     }
@@ -115,8 +117,7 @@
   <h1 class="heading">Weather</h1>
   <div class="d-flex w-100 justify-content-center">
     <div class="image w-50 d-flex justify-content-start">
-      <img src="{{ url_for('static', filename='earth.png') }}" alt="weather image" class="spin"
-        style="max-height: 500px;" />
+      <img src="{{ url_for('static', filename='earth.png') }}" alt="weather image" class="spin">
     </div>
 
     <div class="form-container p-4 rounded-4 shadow-lg">

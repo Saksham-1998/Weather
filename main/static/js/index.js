@@ -14,6 +14,7 @@ weatherForm.addEventListener("submit", async event => {
             displayWeatherInfo(weatherData);
 
             saveCity(city);
+
             
         }
         catch (error) {
@@ -44,11 +45,14 @@ async function getWeatherData(city) {
 function displayWeatherInfo(data) {
 
     const { name: city,
+        coord: {lon , lat},
         main: { temp, humidity },
         weather: [{ description, id }] } = data;
 
     card.textContent= "";
     card.style.visibility="visible";
+
+    pinCity(lon , lat);
     
     const cityDisplay = document.createElement("h1");
     const tempDisplay = document.createElement("p");
@@ -100,6 +104,25 @@ function getWeatherEmoji(weatherId) {
 
 }
 
+/*** pin a city on map ***/
+function pinCity(lon, lat){
+    const map = document.querySelector(".map");
+    const pinContainer= document.querySelector("#pinContainer");
+
+    pinContainer.innerHTML = "";
+
+    const pin = document.createElement("div");
+    pin.classList.add("pin");
+
+    const x = ((lon + 182)/360)* map.clientWidth;
+    const y = ((114 - lat)/180)* map.clientHeight;
+    
+    pin.style.left = `${x}px`;
+    pin.style.top = `${y}px`;
+
+    pinContainer.appendChild(pin);
+}
+
 
 /**** error display ****/
 
@@ -115,7 +138,7 @@ function displayError(message) {
 
 }
 
-
+/*** getting weather form history ***/
 
 window.addEventListener("DOMContentLoaded", async () => {
     const savedCity = localStorage.getItem("selectedCity");
@@ -126,6 +149,8 @@ window.addEventListener("DOMContentLoaded", async () => {
         localStorage.removeItem("selectedCity");
     }
 });
+
+/**** saving history ****/
 
 function saveCity(cityName) {
     fetch('/history', {
@@ -142,6 +167,8 @@ function saveCity(cityName) {
         }
     });
 }
+
+/*** aleart message ***/
 
 document.addEventListener("DOMContentLoaded", function() {
     const messages = document.querySelectorAll('.flash-message');
