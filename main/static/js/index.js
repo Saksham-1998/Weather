@@ -115,7 +115,7 @@ function pinCity(lon, lat){
     pin.classList.add("pin");
 
     const x = ((lon + 182)/360)* map.clientWidth;
-    const y = ((114 - lat)/180)* map.clientHeight;
+    const y = ((112 - lat)/180)* map.clientHeight;
     
     pin.style.left = `${x}px`;
     pin.style.top = `${y}px`;
