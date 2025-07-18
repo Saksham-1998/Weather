@@ -125,7 +125,7 @@
             transform: translateX(-50%) scale(0.95);
         }
 
-        .image{
+        .image {
             position: relative;
             width: 100%;
             max-width: 1000px;
@@ -139,7 +139,7 @@
             filter: drop-shadow(15px 20px 1px #000000) contrast(140%) brightness(80%);
         }
 
-        #pinContainer{
+        #pinContainer {
             position: absolute;
             top: 0;
             left: 0;
@@ -148,7 +148,7 @@
             pointer-events: none;
         }
 
-        .pin{
+        .pin {
             position: absolute;
             width: 12px;
             height: 12px;
@@ -159,17 +159,18 @@
             animation: pop 0.3s ease-out;
 
         }
+
         @keyframes pop {
             0% {
                 transform: scale(0.5);
                 opacity: 0;
             }
+
             100% {
                 transform: scale(1);
                 opacity: 1;
             }
         }
-
     </style>
 </head>
 
@@ -188,14 +189,19 @@
         <button type="submit">Get Weather</button>
     </form>
 
-    <div class="d-flex w-100 justify-content-center">
-        <div class="image w-50 d-flex justify-content-start">
-            <img src="{{ url_for('static',filename='2d_map.png') }}" alt="2d_map" class="map">
-            <div id="pinContainer"></div>
-        </div>
+    <div class="container mt-3">
+        <div class="row justify-content-center align-items-start">
+            <div class="col-12 col-md-6 mb-3">
+                <div class="image position-relative w-100">
+                    <img src="{{ url_for('static',filename='2d_map.png') }}" alt="2d_map" class="map">
+                    <div id="pinContainer"></div>
+                </div>
+            </div>
 
-        <div class="form-container p-1 ">
-            <div class="card" style="visibility: hidden"></div>
+            <div class="col-12 col-md-6 mb-3">
+                <div class="card" id="weatherCard" style="visibility: hidden;">
+                </div>
+            </div>
         </div>
     </div>
 
